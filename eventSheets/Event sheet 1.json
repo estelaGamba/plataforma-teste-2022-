@@ -1,0 +1,1207 @@
+{
+	"name": "Event sheet 1",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "pausado",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 602427652988944
+		},
+		{
+			"eventType": "comment",
+			"text": "faz o boneco do jogador ir no lugar do \"jogador caixa\"",
+			"text-color": [
+				1,
+				0.4,
+				0.8705882352941177,
+				1
+			]
+		},
+		{
+			"eventType": "comment",
+			"text": "eh mais facil isso, pq quando for trocar o place holder pelo boneco final, nao vai precisar reprogramar",
+			"text-color": [
+				0.9921568627450981,
+				0.4470588235294118,
+				0.9450980392156862,
+				1
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 720595700776259
+				}
+			],
+			"actions": [
+				{
+					"id": "set-position",
+					"objectClass": "jogador_PlaceHolder",
+					"sid": 719299439106227,
+					"parameters": {
+						"x": "jogadorCaixa.x",
+						"y": "jogadorCaixa.y"
+					}
+				}
+			],
+			"sid": 741416867924941
+		},
+		{
+			"eventType": "comment",
+			"text": "quando inicia o layout ele destroi o jogador caixa e cria um novo \npra evidar algum bug, mas nao sei qual :v",
+			"text-color": [
+				0.6352941176470588,
+				0.0392156862745098,
+				0.803921568627451,
+				1
+			]
+		},
+		{
+			"eventType": "comment",
+			"text": "e tambem vai memorizar a posição de todas as plataformas que caem",
+			"text-color": [
+				0.6352941176470588,
+				0.023529411764705882,
+				0.7568627450980392,
+				1
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 106900387253239
+				}
+			],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "jogadorCaixa",
+					"sid": 315201451988016
+				},
+				{
+					"id": "create-object",
+					"objectClass": "System",
+					"sid": 114536860005106,
+					"parameters": {
+						"object-to-create": "jogadorCaixa",
+						"layer": "jogador_PlaceHolder.LayerName",
+						"x": "jogador_PlaceHolder.X",
+						"y": "jogador_PlaceHolder.Y",
+						"create-hierarchy": false,
+						"template-name": "\"\""
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "plataformaQueCai",
+					"sid": 389060380186983,
+					"parameters": {
+						"instance-variable": "Y_antigo",
+						"value": "plataformaQueCai.Y"
+					}
+				}
+			],
+			"sid": 747202374692007
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-destroyed",
+					"objectClass": "jogador_PlaceHolder",
+					"sid": 781197448632850
+				}
+			],
+			"actions": [
+				{
+					"id": "restart-layout",
+					"objectClass": "System",
+					"sid": 305324670577622
+				}
+			],
+			"sid": 611708649694135
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "movimentos",
+			"description": "o boneco vai mover tudo menos o pinto",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "o jogador vai se movimentar ne porr",
+					"text-color": [
+						0.8196078431372549,
+						0,
+						0.6705882352941176,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 389021537487423,
+							"parameters": {
+								"key": 39
+							}
+						},
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 158838998005944,
+							"parameters": {
+								"key": 37
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "simulate-control",
+							"objectClass": "jogadorCaixa",
+							"sid": 254622485987694,
+							"behaviorType": "Platform",
+							"parameters": {
+								"control": "right"
+							}
+						}
+					],
+					"sid": 706163108256500,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-mirrored",
+									"objectClass": "jogador_PlaceHolder",
+									"sid": 225730276257798
+								}
+							],
+							"actions": [
+								{
+									"id": "set-mirrored",
+									"objectClass": "jogador_PlaceHolder",
+									"sid": 548248148518973,
+									"parameters": {
+										"state": "not-mirrored"
+									}
+								}
+							],
+							"sid": 806473963918080
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 795061603406449,
+							"parameters": {
+								"key": 37
+							}
+						},
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 853079135244308,
+							"parameters": {
+								"key": 39
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "simulate-control",
+							"objectClass": "jogadorCaixa",
+							"sid": 539754328282124,
+							"behaviorType": "Platform",
+							"parameters": {
+								"control": "left"
+							}
+						}
+					],
+					"sid": 358270279648545,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-mirrored",
+									"objectClass": "jogador_PlaceHolder",
+									"sid": 263566253257924,
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-mirrored",
+									"objectClass": "jogador_PlaceHolder",
+									"sid": 607613085925090,
+									"parameters": {
+										"state": "mirrored"
+									}
+								}
+							],
+							"sid": 375889521548379
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 985926775872377,
+							"parameters": {
+								"key": 90
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "simulate-control",
+							"objectClass": "jogadorCaixa",
+							"sid": 133652752590832,
+							"behaviorType": "Platform",
+							"parameters": {
+								"control": "jump"
+							}
+						}
+					],
+					"sid": 866582551979317
+				},
+				{
+					"eventType": "comment",
+					"text": "o personagem vai atirar e pegar no meu...",
+					"text-color": [
+						0.984313725490196,
+						0,
+						1,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 243617986929163,
+							"parameters": {
+								"key": 88
+							}
+						},
+						{
+							"id": "is-mirrored",
+							"objectClass": "jogador_PlaceHolder",
+							"sid": 537123807222387,
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "spawn-another-object",
+							"objectClass": "jogadorCaixa",
+							"sid": 549451208900302,
+							"parameters": {
+								"object": "Sprite4",
+								"layer": "0",
+								"image-point": "1",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 180193831462047
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 781398057808630,
+							"parameters": {
+								"key": 88
+							}
+						},
+						{
+							"id": "is-mirrored",
+							"objectClass": "jogador_PlaceHolder",
+							"sid": 761763868207684
+						}
+					],
+					"actions": [
+						{
+							"id": "spawn-another-object",
+							"objectClass": "jogadorCaixa",
+							"sid": 453405498938197,
+							"parameters": {
+								"object": "Sprite4",
+								"layer": "0",
+								"image-point": "-1",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 802435152760286
+				}
+			],
+			"sid": 450744162981086,
+			"text-color": [
+				0.7686274509803922,
+				0.25098039215686274,
+				0.7254901960784313,
+				1
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-animation-finished",
+					"objectClass": "Sprite4",
+					"sid": 549766498177150,
+					"parameters": {
+						"animation": "\"tiro\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "Sprite4",
+					"sid": 224464694335340
+				}
+			],
+			"sid": 987664968063340
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-collision-with-another-object",
+					"objectClass": "Sprite4",
+					"sid": 830334931326101,
+					"parameters": {
+						"object": "Tilemap"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "Sprite4",
+					"sid": 985471837976244
+				}
+			],
+			"sid": 645811502292422
+		},
+		{
+			"eventType": "comment",
+			"text": "inimigo",
+			"text-color": [
+				0,
+				0,
+				0,
+				0
+			],
+			"background-color": [
+				0.9333333333333333,
+				0.5058823529411764,
+				0.5058823529411764,
+				1
+			]
+		},
+		{
+			"eventType": "comment",
+			"text": "eu deveria usar o \"families\" para programar vários inimigos com a mesma IA",
+			"text-color": [
+				1,
+				0.23921568627450981,
+				0.23921568627450981,
+				1
+			]
+		},
+		{
+			"eventType": "comment",
+			"text": "mas nao eh possivel fazer isso no construct gratis",
+			"text-color": [
+				0.8823529411764706,
+				0.23921568627450981,
+				0.23921568627450981,
+				1
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-collision-with-another-object",
+					"objectClass": "Sprite4",
+					"sid": 699845365137171,
+					"parameters": {
+						"object": "ene_cobra"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "ene_cobra",
+					"sid": 343503299230817
+				},
+				{
+					"id": "destroy",
+					"objectClass": "Sprite4",
+					"sid": 616257301514416
+				}
+			],
+			"sid": 317009622597487,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 591998202145831,
+							"parameters": {
+								"object": "ene_cobra"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 953701418711019,
+							"parameters": {
+								"object-to-create": "explocaoCobra",
+								"layer": "0",
+								"x": "ene_cobra.X",
+								"y": "ene_cobra.Y",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 617904200178986
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-animation-playing",
+					"objectClass": "ene_cobra",
+					"sid": 225011768150989,
+					"parameters": {
+						"animation": "\"death\""
+					},
+					"isInverted": true
+				}
+			],
+			"actions": [],
+			"sid": 376567376500750,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-mirrored",
+							"objectClass": "ene_cobra",
+							"sid": 741698227150946
+						}
+					],
+					"actions": [
+						{
+							"id": "simulate-control",
+							"objectClass": "ene_cobra",
+							"sid": 226646281413057,
+							"behaviorType": "Platform",
+							"parameters": {
+								"control": "left"
+							}
+						}
+					],
+					"sid": 537447166333662
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-mirrored",
+							"objectClass": "ene_cobra",
+							"sid": 125803996625710,
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "simulate-control",
+							"objectClass": "ene_cobra",
+							"sid": 910418948772019,
+							"behaviorType": "Platform",
+							"parameters": {
+								"control": "right"
+							}
+						}
+					],
+					"sid": 415861788161623
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-overlapping-at-offset",
+					"objectClass": "ene_cobra",
+					"sid": 725591156876188,
+					"parameters": {
+						"object": "Tilemap",
+						"offset-x": "1",
+						"offset-y": "0"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-mirrored",
+					"objectClass": "ene_cobra",
+					"sid": 832398086212821,
+					"parameters": {
+						"state": "mirrored"
+					}
+				}
+			],
+			"sid": 996194919479450
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-overlapping-at-offset",
+					"objectClass": "ene_cobra",
+					"sid": 288372756334738,
+					"parameters": {
+						"object": "Tilemap",
+						"offset-x": "-1",
+						"offset-y": "0"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-mirrored",
+					"objectClass": "ene_cobra",
+					"sid": 515581725960490,
+					"parameters": {
+						"state": "not-mirrored"
+					}
+				}
+			],
+			"sid": 210630470910520
+		},
+		{
+			"eventType": "comment",
+			"text": "ao colidir com outro inimigo ele espelha tbm",
+			"text-color": [
+				0.984313725490196,
+				0.6352941176470588,
+				0.6352941176470588,
+				1
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-collision-with-another-object",
+					"objectClass": "ene_cobra",
+					"sid": 650942047382642,
+					"parameters": {
+						"object": "ene_cobra"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-width",
+					"objectClass": "ene_cobra",
+					"sid": 616680507157275,
+					"parameters": {
+						"width": "-Self.Width"
+					}
+				}
+			],
+			"sid": 118033268840712,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "pular em cima e mata o inimigo",
+					"text-color": [
+						0.9921568627450981,
+						0.4666666666666667,
+						0.4666666666666667,
+						1
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-collision-with-another-object",
+					"objectClass": "jogadorCaixa",
+					"sid": 548318563182737,
+					"parameters": {
+						"object": "ene_cobra"
+					}
+				},
+				{
+					"id": "is-animation-playing",
+					"objectClass": "ene_cobra",
+					"sid": 253440653345600,
+					"parameters": {
+						"animation": "\"death\""
+					},
+					"isInverted": true
+				},
+				{
+					"id": "is-falling",
+					"objectClass": "jogadorCaixa",
+					"sid": 104322381272875,
+					"behaviorType": "Platform"
+				},
+				{
+					"id": "compare-y",
+					"objectClass": "jogadorCaixa",
+					"sid": 238402104706490,
+					"parameters": {
+						"comparison": 2,
+						"y-co-ordinate": "ene_cobra.Y - ene_cobra.Height/4"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-vector-y",
+					"objectClass": "jogadorCaixa",
+					"sid": 910070299121167,
+					"behaviorType": "Platform",
+					"parameters": {
+						"vector-y": "-200"
+					}
+				},
+				{
+					"id": "subtract-from-instvar",
+					"objectClass": "ene_cobra",
+					"sid": 569777226174375,
+					"parameters": {
+						"instance-variable": "health",
+						"value": "1"
+					}
+				}
+			],
+			"sid": 122955111537742
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "compare-instance-variable",
+					"objectClass": "ene_cobra",
+					"sid": 971447633902618,
+					"parameters": {
+						"instance-variable": "health",
+						"comparison": 3,
+						"value": "0"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-animation",
+					"objectClass": "ene_cobra",
+					"sid": 967031624841729,
+					"parameters": {
+						"animation": "\"death\"",
+						"from": "beginning"
+					}
+				}
+			],
+			"sid": 398440438673373
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-animation-finished",
+					"objectClass": "ene_cobra",
+					"sid": 583747527057195,
+					"parameters": {
+						"animation": "\"death\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "ene_cobra",
+					"sid": 564475405069460
+				}
+			],
+			"sid": 155233616937924,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "quando mata inimigo ele explode",
+					"text-color": [
+						0.9725490196078431,
+						0.28627450980392155,
+						0.28627450980392155,
+						1
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 632205664911271,
+							"parameters": {
+								"object": "ene_cobra"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 187881846256026,
+							"parameters": {
+								"object-to-create": "explocaoCobra",
+								"layer": "0",
+								"x": "ene_cobra.X",
+								"y": "ene_cobra.Y",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 931853318350718
+				}
+			]
+		},
+		{
+			"eventType": "comment",
+			"text": "faz pausar essa caralha",
+			"text-color": [
+				0.807843137254902,
+				0.13725490196078433,
+				0.8196078431372549,
+				1
+			]
+		},
+		{
+			"eventType": "comment",
+			"text": "vai pausar ate o fogo do seu rabo",
+			"text-color": [
+				0.6901960784313725,
+				0.011764705882352941,
+				0.5647058823529412,
+				1
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 536037629998589,
+					"parameters": {
+						"key": 27
+					}
+				}
+			],
+			"actions": [],
+			"sid": 606261905364984,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 807434726772170,
+							"parameters": {
+								"variable": "pausado"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-time-scale",
+							"objectClass": "System",
+							"sid": 987013881125576,
+							"parameters": {
+								"time-scale": "1.0"
+							}
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 244311964731654,
+							"parameters": {
+								"variable": "pausado",
+								"value": "false"
+							}
+						},
+						{
+							"id": "set-group-active",
+							"objectClass": "System",
+							"sid": 511650099175382,
+							"parameters": {
+								"group-name": "\"movimentos\"",
+								"state": "activated"
+							}
+						}
+					],
+					"sid": 151466545860618
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 320173082968890
+						}
+					],
+					"actions": [
+						{
+							"id": "set-time-scale",
+							"objectClass": "System",
+							"sid": 743324481235839,
+							"parameters": {
+								"time-scale": "0"
+							}
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 569941583914343,
+							"parameters": {
+								"variable": "pausado",
+								"value": "true"
+							}
+						},
+						{
+							"id": "set-group-active",
+							"objectClass": "System",
+							"sid": 190137397834217,
+							"parameters": {
+								"group-name": "\"movimentos\"",
+								"state": "deactivated"
+							}
+						}
+					],
+					"sid": 414168147376720
+				}
+			]
+		},
+		{
+			"eventType": "comment",
+			"text": "plataforma que cai",
+			"text-color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"background-color": [
+				0.4392156862745098,
+				0,
+				0.6392156862745098,
+				1
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-landed",
+					"objectClass": "jogadorCaixa",
+					"sid": 684371344475195,
+					"behaviorType": "Platform"
+				},
+				{
+					"id": "is-overlapping-at-offset",
+					"objectClass": "jogadorCaixa",
+					"sid": 550777558286143,
+					"parameters": {
+						"object": "plataformaQueCai",
+						"offset-x": "0",
+						"offset-y": "1"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-animation",
+					"objectClass": "plataformaQueCai",
+					"sid": 590624805880996,
+					"parameters": {
+						"animation": "\"tremeTreme\"",
+						"from": "beginning"
+					}
+				},
+				{
+					"id": "wait",
+					"objectClass": "System",
+					"sid": 540920443931308,
+					"parameters": {
+						"seconds": "0.3",
+						"use-timescale": true
+					}
+				},
+				{
+					"id": "set-animation",
+					"objectClass": "plataformaQueCai",
+					"sid": 988297281686448,
+					"parameters": {
+						"animation": "\"Animation 1\"",
+						"from": "beginning"
+					}
+				},
+				{
+					"id": "set-boolean-instvar",
+					"objectClass": "plataformaQueCai",
+					"sid": 128112883776762,
+					"parameters": {
+						"instance-variable": "caindo",
+						"value": "true"
+					}
+				}
+			],
+			"sid": 572268058086247
+		},
+		{
+			"eventType": "comment",
+			"text": "caso queira fazer a plataforma ir pra cima eh \"sey y: self.Y - 100 * dt\""
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-boolean-instance-variable-set",
+					"objectClass": "plataformaQueCai",
+					"sid": 150307518235183,
+					"parameters": {
+						"instance-variable": "caindo"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-y",
+					"objectClass": "plataformaQueCai",
+					"sid": 488977828615616,
+					"parameters": {
+						"y": "Self.Y + plataformaQueCai.velocidade * dt"
+					}
+				},
+				{
+					"id": "add-to-instvar",
+					"objectClass": "plataformaQueCai",
+					"sid": 789742217211732,
+					"parameters": {
+						"instance-variable": "tempoCaido",
+						"value": "dt"
+					}
+				}
+			],
+			"sid": 666313646344500,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "plataformaQueCai",
+							"sid": 908706270365771,
+							"parameters": {
+								"instance-variable": "velocidade",
+								"comparison": 2,
+								"value": "100"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "add-to-instvar",
+							"objectClass": "plataformaQueCai",
+							"sid": 889366164829554,
+							"parameters": {
+								"instance-variable": "velocidade",
+								"value": "300 * dt"
+							}
+						}
+					],
+					"sid": 991063643063608
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "plataformaQueCai",
+							"sid": 549462834336244,
+							"parameters": {
+								"instance-variable": "tempoCaido",
+								"comparison": 4,
+								"value": "3"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "plataformaQueCai",
+							"sid": 425174255131175,
+							"parameters": {
+								"instance-variable": "tempoCaido",
+								"value": "0"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "plataformaQueCai",
+							"sid": 662880541528287,
+							"parameters": {
+								"instance-variable": "velocidade",
+								"value": "0"
+							}
+						},
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "plataformaQueCai",
+							"sid": 903537572616822,
+							"parameters": {
+								"instance-variable": "caindo",
+								"value": "false"
+							}
+						},
+						{
+							"id": "set-enabled",
+							"objectClass": "plataformaQueCai",
+							"sid": 605333524983609,
+							"behaviorType": "Jumpthru",
+							"parameters": {
+								"state": "disabled"
+							}
+						}
+					],
+					"sid": 219993600162256
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-enabled",
+					"objectClass": "plataformaQueCai",
+					"sid": 844444707264335,
+					"behaviorType": "Jumpthru",
+					"isInverted": true
+				}
+			],
+			"actions": [],
+			"sid": 201885967119258,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-y",
+							"objectClass": "plataformaQueCai",
+							"sid": 113495355383529,
+							"parameters": {
+								"comparison": 4,
+								"y-co-ordinate": "plataformaQueCai.Y_antigo"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-y",
+							"objectClass": "plataformaQueCai",
+							"sid": 593043386642676,
+							"parameters": {
+								"y": "Self.Y - 500 * dt"
+							}
+						}
+					],
+					"sid": 153400422568329
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 287378364370087
+						}
+					],
+					"actions": [
+						{
+							"id": "set-y",
+							"objectClass": "plataformaQueCai",
+							"sid": 794161264806050,
+							"parameters": {
+								"y": "Self.Y_antigo"
+							}
+						},
+						{
+							"id": "set-enabled",
+							"objectClass": "plataformaQueCai",
+							"sid": 888691681313554,
+							"behaviorType": "Jumpthru",
+							"parameters": {
+								"state": "enabled"
+							}
+						}
+					],
+					"sid": 458083584717020
+				}
+			]
+		}
+	],
+	"sid": 380049637690091
+}

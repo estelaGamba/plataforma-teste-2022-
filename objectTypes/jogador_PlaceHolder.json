@@ -1,0 +1,58 @@
+{
+	"name": "jogador_PlaceHolder",
+	"plugin-id": "Sprite",
+	"sid": 518886175885747,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "destroy",
+			"name": "DestroyOutsideLayout",
+			"sid": 463415948579638
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 19,
+						"height": 29,
+						"originX": 0.5,
+						"originY": 1,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 4109110,
+						"collisionPoly": {
+							"points": [
+								0.19407894736842068,
+								0.21767241379310417,
+								0.7894736842105271,
+								0.20905172413793177,
+								0.7642543859649114,
+								0.9913793103448271,
+								0.22697368421053005,
+								0.9935344827586197
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 822889740690877,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

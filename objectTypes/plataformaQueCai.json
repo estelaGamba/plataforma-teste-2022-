@@ -1,0 +1,138 @@
+{
+	"name": "plataformaQueCai",
+	"plugin-id": "Sprite",
+	"sid": 472557856462018,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "caindo",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 832937759421189
+		},
+		{
+			"name": "velocidade",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 219547749084057
+		},
+		{
+			"name": "Y_antigo",
+			"type": "number",
+			"desc": "faz lembrar a posição que a plataforma tava antes de cair",
+			"show": true,
+			"sid": 116723336183072
+		},
+		{
+			"name": "tempoCaido",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 709520924629283
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "jumpthru",
+			"name": "Jumpthru",
+			"sid": 409272684216914
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 50,
+						"height": 6,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 9833117,
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 425702765879103,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 52,
+						"height": 6,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 254758,
+						"collisionPoly": {
+							"points": [
+								0.019230769230769232,
+								0,
+								0.9807692307692307,
+								0,
+								0.9807692307692307,
+								1,
+								0.019230769230769232,
+								1
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					},
+					{
+						"width": 52,
+						"height": 6,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 2073353,
+						"collisionPoly": {
+							"points": [
+								0.019230769230769232,
+								0,
+								0.9807692307692307,
+								0,
+								0.9807692307692307,
+								1,
+								0.019230769230769232,
+								1
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 819937778237814,
+				"name": "tremeTreme",
+				"isLooping": true,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 15
+			}
+		],
+		"subfolders": []
+	}
+}
